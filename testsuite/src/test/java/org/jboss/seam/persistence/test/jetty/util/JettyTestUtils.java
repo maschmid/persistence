@@ -28,19 +28,19 @@ import org.jboss.shrinkwrap.api.spec.WebArchive;
 public class JettyTestUtils {
     public static WebArchive createJPATestArchive() {
         WebArchive war = ShrinkWrap.createDomain().getArchiveFactory().create(WebArchive.class, "test.war");
-        war.addWebResource("META-INF/jpa-seam-beans.xml", "classes/META-INF/seam-beans.xml");
-        war.addWebResource("WEB-INF/jetty-env.xml", "jetty-env.xml");
-        war.addWebResource("WEB-INF/web.xml", "web.xml");
-        war.addServiceProvider(ExpressionFactory.class, ExpressionFactoryImpl.class);
+        war.addAsWebInfResource("META-INF/jpa-seam-beans.xml", "classes/META-INF/seam-beans.xml");
+        war.addAsWebInfResource("WEB-INF/jetty-env.xml", "jetty-env.xml");
+        war.addAsWebInfResource("WEB-INF/web.xml", "web.xml");
+        war.addAsServiceProvider(ExpressionFactory.class, ExpressionFactoryImpl.class);
         return war;
     }
 
     public static WebArchive createHibernateTestArchive() {
         WebArchive war = ShrinkWrap.createDomain().getArchiveFactory().create(WebArchive.class, "test.war");
-        war.addWebResource("META-INF/hibernate-seam-beans.xml", "classes/META-INF/seam-beans.xml");
-        war.addWebResource("WEB-INF/jetty-env.xml", "jetty-env.xml");
-        war.addWebResource("WEB-INF/web.xml", "web.xml");
-        war.addServiceProvider(ExpressionFactory.class, ExpressionFactoryImpl.class);
+        war.addAsWebInfResource("META-INF/hibernate-seam-beans.xml", "classes/META-INF/seam-beans.xml");
+        war.addAsWebInfResource("WEB-INF/jetty-env.xml", "jetty-env.xml");
+        war.addAsWebInfResource("WEB-INF/web.xml", "web.xml");
+        war.addAsServiceProvider(ExpressionFactory.class, ExpressionFactoryImpl.class);
         return war;
     }
 }

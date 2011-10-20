@@ -16,8 +16,9 @@
  */
 package org.jboss.seam.persistence.hibernate.test.jetty;
 
-import org.jboss.arquillian.api.Deployment;
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
+import org.jboss.seam.persistence.hibernate.test.ManagedHibernateSessionELTestBase;
 import org.jboss.seam.persistence.test.jetty.util.JettyTestUtils;
 import org.jboss.shrinkwrap.api.Archive;
 import org.jboss.shrinkwrap.api.spec.WebArchive;
@@ -28,8 +29,8 @@ public class ManagedHibernateSessionELTest extends ManagedHibernateSessionELTest
     @Deployment
     public static Archive<?> createTestArchive() {
         WebArchive war = JettyTestUtils.createHibernateTestArchive();
-        war.addWebResource("WEB-INF/hibernate-beans.xml", "beans.xml");
-        war.addWebResource("META-INF/hibernate-std.cfg.xml", "classes/hibernate.cfg.xml");
+        war.addAsWebInfResource("WEB-INF/hibernate-beans.xml", "beans.xml");
+        war.addAsWebInfResource("META-INF/hibernate-std.cfg.xml", "classes/hibernate.cfg.xml");
         war.addClasses(getTestClasses());
         return war;
     }

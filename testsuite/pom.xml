@@ -29,6 +29,19 @@
            <scope>provided</scope>
         </dependency>
         -->
+
+        <dependency>
+            <groupId>org.jboss.spec.javax.ejb</groupId>
+            <artifactId>jboss-ejb-api_3.1_spec</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.validation</groupId>
+            <artifactId>validation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.hibernate.javax.persistence</groupId>
             <artifactId>hibernate-jpa-2.0-api</artifactId>
@@ -63,6 +76,24 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <scope>provided</scope>
+        </dependency>
+
+         <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -117,6 +148,12 @@
         <dependency>
             <groupId>org.jboss.shrinkwrap.resolver</groupId>
             <artifactId>shrinkwrap-resolver-impl-maven</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.web</groupId>
+            <artifactId>el-impl</artifactId>
+            <scope>provided</scope>
         </dependency>
 
     </dependencies>
@@ -205,8 +242,18 @@
                         <directory>src/test/resources-jbossas-7</directory>
                     </testResource>
                 </testResources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/test/jetty/**</exclude>
+                            </excludes>
+                        </configuration>
+                   </plugin>
+               </plugins>
             </build>
-
         </profile> 
 
         <profile>
@@ -236,8 +283,103 @@
                         <directory>src/test/resources-jbossas-7</directory>
                     </testResource>
                 </testResources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/test/jetty/**</exclude>
+                            </excludes>
+                        </configuration>
+                   </plugin>
+               </plugins>
             </build>
+        </profile>
 
+        <profile>
+            <id>jetty-embedded-7</id>
+            <activation>
+                <property>
+                    <name>arquillian</name>
+                    <value>jetty-embedded-7</value>
+                </property>
+            </activation>
+
+            <dependencies>
+                <dependency>
+                    <groupId>org.jboss.arquillian.container</groupId>
+                    <artifactId>arquillian-jetty-embedded-7</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-webapp</artifactId>
+                    <version>8.0.0.M3</version>
+                    <scope>test</scope>
+                </dependency>
+
+                <!-- plus and naming requires for using JNDI -->
+                <dependency>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-plus</artifactId>
+                    <version>8.0.0.M3</version>
+                    <scope>test</scope>
+                </dependency>
+
+                <!-- Weld servlet, EL and JSP required for testing CDI injections -->
+
+                <dependency>
+                    <groupId>org.jboss.weld.servlet</groupId>
+                    <artifactId>weld-servlet</artifactId>
+                    <scope>test</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.glassfish.web</groupId>
+                    <artifactId>el-impl</artifactId>
+                    <scope>test</scope>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-api</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-ext</artifactId>
+                </dependency>
+
+                <dependency>
+                    <groupId>javax.servlet.jsp</groupId>
+                    <artifactId>jsp-api</artifactId>
+                    <version>2.2</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+
+            <build>
+                <testResources>
+                    <testResource>
+                        <directory>src/test/resources</directory>
+                    </testResource>
+                    <testResource>
+                        <directory>src/test/resources-jetty-hibernate</directory>
+                    </testResource>
+                </testResources>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <excludes>
+                                <exclude>**/test/jboss/**</exclude>
+                            </excludes>
+                        </configuration>
+                   </plugin>
+               </plugins>
+            </build>
         </profile>
     </profiles>
 </project>

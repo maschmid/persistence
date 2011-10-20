@@ -16,7 +16,7 @@
  */
 package org.jboss.seam.persistence.test.jetty;
 
-import org.jboss.arquillian.api.Deployment;
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.seam.persistence.test.HibernateSearchTestBase;
 import org.jboss.seam.persistence.test.jetty.util.JettyTestUtils;
@@ -29,9 +29,9 @@ public class HibernateSearchTest extends HibernateSearchTestBase {
     @Deployment
     public static Archive<?> createTestArchive() {
         WebArchive war = JettyTestUtils.createJPATestArchive();
-        war.addWebResource("WEB-INF/beans.xml", "beans.xml");
+        war.addAsWebInfResource("WEB-INF/beans.xml", "beans.xml");
         war.addClasses(getTestClasses());
-        war.addWebResource("META-INF/persistence-search.xml", "classes/META-INF/persistence.xml");
+        war.addAsWebInfResource("META-INF/persistence-search.xml", "classes/META-INF/persistence.xml");
         return war;
     }
 
