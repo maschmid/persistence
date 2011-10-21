@@ -31,7 +31,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
 public class JBossASHibernateSearchTest extends HibernateSearchTestBase {
-    @Deployment(name="HibernateSearch")
+    @Deployment
     public static Archive<?> createTestArchive() {
         WebArchive war = JBossASTestUtils.createTestArchive();
         

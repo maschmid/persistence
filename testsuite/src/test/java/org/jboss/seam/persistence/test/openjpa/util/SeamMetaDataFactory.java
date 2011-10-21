@@ -16,22 +16,15 @@
  */
 package org.jboss.seam.persistence.test.openjpa.util;
 
-import javax.el.ExpressionFactory;
+import java.util.Collections;
+import java.util.Set;
 
-import com.sun.el.ExpressionFactoryImpl;
-import org.jboss.shrinkwrap.api.ShrinkWrap;
-import org.jboss.shrinkwrap.api.spec.WebArchive;
+import org.apache.openjpa.persistence.PersistenceMetaDataFactory;
 
-/**
- * @author Stuart Douglas
- */
-public class JettyTestUtils {
-    public static WebArchive createTestArchive() {
-        WebArchive war = ShrinkWrap.createDomain().getArchiveFactory().create(WebArchive.class, "test.war");
-        war.addAsWebInfResource("META-INF/seam-beans.xml", "classes/META-INF/seam-beans.xml");
-        war.addAsWebInfResource("WEB-INF/jetty-env.xml", "jetty-env.xml");
-        war.addAsWebInfResource("WEB-INF/web.xml", "web.xml");
-        war.addAsServiceProvider(ExpressionFactory.class, ExpressionFactoryImpl.class);
-        return war;
+public class SeamMetaDataFactory extends PersistenceMetaDataFactory {
+
+    public Set<String> getPersistentTypeNames(boolean arg0, ClassLoader arg1) {
+        return Collections.singleton("org.jboss.seam.persistence.test.util.Hotel");
     }
+
 }

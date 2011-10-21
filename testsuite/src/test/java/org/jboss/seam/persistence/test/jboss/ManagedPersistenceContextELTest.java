@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
 public class ManagedPersistenceContextELTest extends ManagedPersistenceContextELTestBase {
-    @Deployment(name="ManagedPersistenceContextEL")
+    @Deployment
     public static Archive<?> createTestArchive() {
         WebArchive war = JBossASTestUtils.createTestArchive();
         war.addClasses(getTestClasses());

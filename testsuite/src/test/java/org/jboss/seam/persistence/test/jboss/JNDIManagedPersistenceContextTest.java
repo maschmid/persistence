@@ -29,7 +29,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
 public class JNDIManagedPersistenceContextTest extends ManagedPersistenceContextTestBase {
-    @Deployment(name="JNDIManagedPersistenceContext")
+    @Deployment
     public static Archive<?> createTestArchive() {
         WebArchive war = JBossASTestUtils.createTestArchive();
         war.addClasses(new Class[]{ManagedPersistenceContextTestBase.class, Hotel.class, JNDIManagedPersistenceContextProvider.class, HelloService.class});

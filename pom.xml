@@ -23,8 +23,6 @@
     <modules>
         <module>api</module>
         <module>impl</module>
-<!--        <module>tests/base</module>
-        <module>tests/jetty-hibernate</module>-->
         <module>testsuite</module>
     </modules>
 
@@ -59,14 +57,6 @@
                 <artifactId>seam-persistence</artifactId>
                 <version>${project.version}</version>
             </dependency>
-
-<!--
-            <dependency>
-                <groupId>org.jboss.seam.persistence</groupId>
-                <artifactId>seam-persistence-tests-base</artifactId>
-                <version>${project.version}</version>
-            </dependency>
--->
         </dependencies>
 
     </dependencyManagement>

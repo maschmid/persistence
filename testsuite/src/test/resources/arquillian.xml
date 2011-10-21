@@ -13,7 +13,10 @@
     <container qualifier="jbossas-remote-7">
     </container>
 
-    <container qualifier="jetty-embedded-7">
+    <container qualifier="jetty-embedded-7-hibernate">
+    </container>
+
+    <container qualifier="jetty-embedded-7-openjpa">
     </container>
 
 </arquillian>
