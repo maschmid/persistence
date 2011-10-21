@@ -20,7 +20,7 @@ import java.util.HashMap;
 
 import javax.inject.Inject;
 
-import org.jboss.arquillian.api.Deployment;
+import org.jboss.arquillian.container.test.api.Deployment;
 import org.jboss.arquillian.junit.Arquillian;
 import org.jboss.seam.persistence.test.ManagedPersistenceContextFlushModeTestBase;
 import org.jboss.seam.persistence.test.jetty.util.JettyTestUtils;
@@ -41,8 +41,8 @@ public class ManagedPersistenceContextFlushModeTest extends ManagedPersistenceCo
     @Deployment
     public static Archive<?> createTestArchive() {
         WebArchive war = JettyTestUtils.createJPATestArchive();
-        war.addWebResource("WEB-INF/beans.xml", "beans.xml");
-        war.addWebResource("META-INF/persistence-std.xml", "classes/META-INF/persistence.xml");
+        war.addAsWebInfResource("WEB-INF/beans.xml", "beans.xml");
+        war.addAsWebInfResource("META-INF/persistence-std.xml", "classes/META-INF/persistence.xml");
         war.addClasses(getTestClasses());
         return war;
     }
