@@ -26,7 +26,7 @@ import org.junit.runner.RunWith;
 
 @RunWith(Arquillian.class)
 public class ManagedPersistenceContextCreatedEventTest extends ManagedPersistenceContextCreatedEventTestBase {
-    @Deployment
+    @Deployment(name="ManagedPersistenceContextCreatedEvent")
     public static Archive<?> createTestArchive() {
         WebArchive war = JettyTestUtils.createJPATestArchive();
         war.addAsWebInfResource("WEB-INF/beans.xml", "beans.xml");

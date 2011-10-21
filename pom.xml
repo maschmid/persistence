@@ -59,6 +59,7 @@
                 <artifactId>seam-persistence</artifactId>
                 <version>${project.version}</version>
             </dependency>
+
 <!--
             <dependency>
                 <groupId>org.jboss.seam.persistence</groupId>

@@ -38,7 +38,7 @@ public class ManagedPersistenceContextFlushModeTest extends ManagedPersistenceCo
     @Bound
     private BoundConversationContext context;
 
-    @Deployment
+    @Deployment(name="ManagedPersistenceContextFlushMode")
     public static Archive<?> createTestArchive() {
         WebArchive war = JettyTestUtils.createJPATestArchive();
         war.addAsWebInfResource("WEB-INF/beans.xml", "beans.xml");
