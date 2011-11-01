@@ -20,7 +20,6 @@
 
     <properties>
         <eclipse.jetty.version>8.0.0.M3</eclipse.jetty.version>
-        <hibernate.core.version>3.6.0.Final</hibernate.core.version>
         <slf4j.version>1.5.10</slf4j.version>
     </properties>
 
@@ -135,7 +134,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-search</artifactId>
-            <version>4.0.0.CR1</version>
+            <version>${hibernate.search.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -196,6 +195,7 @@
                             <systemProperties>
                                 <arquillian.launch>${arquillian}</arquillian.launch>
                                 <arquillian>${arquillian}</arquillian>
+                                <hibernate.search.version>${hibernate.search.version}</hibernate.search.version>
                             </systemProperties>
                         </configuration>
 
@@ -494,6 +494,94 @@
                    </plugin>
                </plugins>
             </build>
+        </profile>
+
+        <profile>
+            <id>hibernate3</id>
+            <activation>
+                <property>
+                    <name>!hibernate4</name>
+                </property>
+            </activation>
+            <properties>
+                <hsqldb.version>1.8.0.10</hsqldb.version>
+                <hibernate.core.version>3.6.6.Final</hibernate.core.version>
+                <hibernate.search.version>3.4.0.Final</hibernate.search.version>
+            </properties>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <id>add-itest-source</id>
+                                <phase>generate-test-sources</phase>
+                                <goals>
+                                    <goal>add-test-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>src/test/hibernate3</source>
+                                    </sources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build> 
+        </profile>
+
+        <profile>
+            <id>hibernate4</id>
+            <activation>
+                <property>
+                    <name>hibernate4</name>
+                </property>
+            </activation>
+            <properties>
+                <hsqldb.version>2.2.4</hsqldb.version>
+                <hibernate.core.version>4.0.0.CR5</hibernate.core.version>
+                <hibernate.search.version>4.0.0.CR1</hibernate.search.version>
+            </properties>
+            <dependencies>
+                <dependency>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-core</artifactId>
+                    <version>${hibernate.core.version}</version>
+                    <scope>test</scope>
+                </dependency>
+                <dependency>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-search</artifactId>
+                    <version>${hibernate.search.version}</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.codehaus.mojo</groupId>
+                        <artifactId>build-helper-maven-plugin</artifactId>
+                        <version>1.7</version>
+                        <executions>
+                            <execution>
+                                <id>add-itest-source</id>
+                                <phase>generate-test-sources</phase>
+                                <goals>
+                                    <goal>add-test-source</goal>
+                                </goals>
+                                <configuration>
+                                    <sources>
+                                        <source>src/test/hibernate4</source>
+                                    </sources>
+                                </configuration>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build> 
         </profile>
     </profiles>
 </project>
